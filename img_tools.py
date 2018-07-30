@@ -51,10 +51,11 @@ def url_to_img_array(url):
 
 
 def get_image(img_path, image_new_size):
-    if img_path.startswith('http'):
-        np_img = url_to_img_array(img_path)
-    else:
-        np_img = cv2.imread(img_path)
+   # if img_path.startswith('http'):
+    #    np_img = url_to_img_array(img_path)
+    #else:
+    print(img_path.decode('UTF-8'))
+    np_img = cv2.imread(img_path.decode('UTF-8'))
         # np_img = np.array(img)
 
     if np_img is None:
@@ -67,4 +68,3 @@ def get_image(img_path, image_new_size):
     dx = int(ceil((image_new_size - x1) / 2))
     dy = int(ceil((image_new_size - y1) / 2))
     return small_image, x1, y1, dx, dy
-
