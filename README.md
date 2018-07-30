@@ -46,11 +46,12 @@ cifar10 scatter image example
 
 ### import into program
 ```python
-from modules import TsneImage   
- 
+from modules import *
+
 image = EmbeddingsProjection()
-image.path2data = 'data.hdf5'
+image.path2data = 'data3.hdf5'
 image.load_data()
+image.background_color = 'WHITE'
 image.calculate_projection()
 image.create_image()
 ```
