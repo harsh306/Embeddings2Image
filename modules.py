@@ -28,7 +28,7 @@ class EmbeddingsProjection(object):
         self._each_img_size = 50
         self._background_color = BLACK
         self._shuffle = True
-        self._method = UMAP
+        self._method = SKLEARN
         self._batch_size = 0
         self._svd = True
         self._data_vectors = None
@@ -170,7 +170,7 @@ class EmbeddingsProjection(object):
             assert len(image_names) == data_vecs.shape[0], 'img list length doen\'t match vector count'
             hf.close()
         self.data_vectors = data_vecs.astype(type('float_', (float,), {}))
-        self.image_list = [f'data/mnist_imgs/{im.decode()}' for im in image_names]
+        self.image_list = self.image_list = [im for im in image_names] #[f'data/mnist_imgs/{im.decode()}' for im in image_names]
         self._crop()
 
     def shuffle(self):
@@ -271,7 +271,7 @@ class EmbeddingsProjection(object):
             # test if there is an image there already
             if np.max(image[x0 + dx:x0 + dx + x1, y0 + dy:y0 + dy + y1]) > 0:
                 continue
-            image[x0 + dx:x0 + dx + x1, y0 + dy:y0 + dy + y1] = small_img
+            image[x0 + dx:x0 + dx + x1, y0 + dy:y0 + dy + y1] = np.transpose(small_img,axes=[1,0,2]) # small_img
 
         return image
 
